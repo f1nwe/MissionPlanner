@@ -975,10 +975,14 @@ namespace MissionPlanner
                     }
                 }
 
+                // Clamp the saved size to the screen we start on. A size saved on a larger
+                // display (or outside a nested X server such as gamescope) would otherwise
+                // overflow it; Mono applies it even to a maximised window.
+                var work = Screen.FromControl(this).WorkingArea;
                 if (Settings.Instance["MainHeight"] != null)
-                    this.Height = Settings.Instance.GetInt32("MainHeight");
+                    this.Height = Math.Min(Settings.Instance.GetInt32("MainHeight"), work.Height);
                 if (Settings.Instance["MainWidth"] != null)
-                    this.Width = Settings.Instance.GetInt32("MainWidth");
+                    this.Width = Math.Min(Settings.Instance.GetInt32("MainWidth"), work.Width);
 
                 // set presaved default telem rates
                 if (Settings.Instance["CMB_rateattitude"] != null)
