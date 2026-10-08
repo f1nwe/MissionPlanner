@@ -1,8 +1,8 @@
 # AGENTS.md — локальні нотатки цього клону (f1nwe)
 
 Remotes: `origin` = форк `f1nwe/MissionPlanner`, `upstream` = `ArduPilot/MissionPlanner` (не пушити).
-Гілка `master` тут чиста і стежить за `upstream/master`, усі свої правки — на гілці
-`fix-restore-size` (цей файл теж). Правила upstream-коду див. `CLAUDE.md`.
+Усі свої правки живуть у `master` форку (цей файл теж); upstream підтягуємо злиттям, без force-push.
+Правила upstream-коду див. `CLAUDE.md`.
 
 ## Як це запускається на цій машині
 
@@ -26,9 +26,9 @@ Mono WinForms DPI ігнорує, у MP `Properties/app.manifest` має `dpiAwa
 ## Оновлення з upstream
 
 ```sh
-git checkout master && git pull upstream master && git push origin master
-git checkout fix-restore-size && git rebase master && git push --force-with-lease
+git pull upstream master     # merge upstream у наш master
 mission-planner-build
+git push
 ```
 
 Клон зроблений з `--filter=blob:none` (історія є, блоби тягнуться за потреби).
@@ -40,5 +40,6 @@ mission-planner-build
   збережений `MainWidth/MainHeight` обмежується робочою областю екрана, бо після звичайного запуску
   в `~/.local/share/Mission Planner/config.xml` лежало 3848×2303, і всередині gamescope (1920×1200)
   Mono робив вікно більшим за екран — саме через це «HiDPI-варіант не працював». Кандидат на PR в upstream.
+- **2026-10-08** — форк `f1nwe/MissionPlanner`; гілку `fix-restore-size` злито в `master`, далі працюємо в `master`.
 - Відомі косметичні проблеми на Linux (не наші): вкладка Quick без підписів, написи HUD накладаються
   при вузькій панелі.
