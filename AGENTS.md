@@ -1,6 +1,7 @@
 # AGENTS.md — локальні нотатки цього клону (f1nwe)
 
-Upstream: `ArduPilot/MissionPlanner`, гілка `master` тут чиста, усі свої правки — на гілці
+Remotes: `origin` = форк `f1nwe/MissionPlanner`, `upstream` = `ArduPilot/MissionPlanner` (не пушити).
+Гілка `master` тут чиста і стежить за `upstream/master`, усі свої правки — на гілці
 `fix-restore-size` (цей файл теж). Правила upstream-коду див. `CLAUDE.md`.
 
 ## Як це запускається на цій машині
@@ -25,8 +26,8 @@ Mono WinForms DPI ігнорує, у MP `Properties/app.manifest` має `dpiAwa
 ## Оновлення з upstream
 
 ```sh
-git checkout master && git pull
-git checkout fix-restore-size && git rebase master
+git checkout master && git pull upstream master && git push origin master
+git checkout fix-restore-size && git rebase master && git push --force-with-lease
 mission-planner-build
 ```
 
